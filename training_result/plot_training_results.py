@@ -73,42 +73,64 @@ def smooth_curve(values, window_size=20):
     return uniform_filter1d(values, size=window_size)
 
 def plot_comparison_all_metrics():
-    """Plot comparison of all metrics (2x2 subplots)"""
+    """Plot comparison of all metrics using bar charts (2x2 subplots)"""
     fig, axes = plt.subplots(2, 2, figsize=(16, 12))
-    fig.suptitle('Training Results Comparison - All Models', fontsize=16, fontweight='bold')
+    fig.suptitle('Training Results Comparison - All Models (Final Performance)', fontsize=16, fontweight='bold')
     
     axes_flat = axes.flatten()
     
     # Define color palette for models
-    colors = plt.cm.tab10(np.linspace(0, 1, 10))  # Get 10 distinct colors
+    colors = plt.cm.Set3(np.linspace(0, 1, 12))  # Get distinct colors
+    
+    # First, collect all data to get consistent model ordering
+    all_runs = set()
+    for metric_key in METRICS.keys():
+        df = load_data(metric_key)
+        all_runs.update(df['Run'].unique())
+    
+    runs = sorted(list(all_runs))
+    model_names = [get_short_run_name(run) for run in runs]
     
     for idx, (metric_key, metric_info) in enumerate(METRICS.items()):
         ax = axes_flat[idx]
         df = load_data(metric_key)
         
-        # Get all unique Runs
-        runs = df['Run'].unique()
-        
-        # Plot curve for each Run with unique color
-        for run_idx, run in enumerate(runs):
+        # Get final values for each model
+        final_values = []
+        for run in runs:
             run_data = df[df['Run'] == run].sort_values('step')
-            short_name = get_short_run_name(run)
-            color = colors[run_idx % len(colors)]  # Assign unique color
-            
-            # Plot raw data with transparency
-            ax.plot(run_data['step'], run_data['value'], 
-                   color=color, linewidth=1.5, alpha=0.25)
-            
-            # Plot smoothed curve with same color
-            smoothed = smooth_curve(run_data['value'].values)
-            ax.plot(run_data['step'], smoothed,
-                   color=color, label=short_name, linewidth=2.5, alpha=0.9)
+            if len(run_data) > 0:
+                final_values.append(run_data['value'].values[-1])
+            else:
+                final_values.append(0)
         
-        ax.set_xlabel('Training Steps', fontsize=11)
-        ax.set_ylabel(metric_info['ylabel'], fontsize=11)
+        # Create bar chart
+        x_pos = np.arange(len(model_names))
+        bars = ax.bar(x_pos, final_values, color=colors[:len(model_names)], 
+                     alpha=0.8, edgecolor='black', linewidth=1.5)
+        
+        # Add value labels on top of bars
+        for i, (bar, value) in enumerate(zip(bars, final_values)):
+            height = bar.get_height()
+            ax.text(bar.get_x() + bar.get_width()/2., height,
+                   f'{value:.2f}',
+                   ha='center', va='bottom', fontsize=9, fontweight='bold')
+        
+        ax.set_xlabel('Model', fontsize=11, fontweight='bold')
+        ax.set_ylabel(metric_info['ylabel'], fontsize=11, fontweight='bold')
         ax.set_title(metric_info['title'], fontsize=12, fontweight='bold')
-        ax.legend(fontsize=9, loc='best')
-        ax.grid(True, alpha=0.3)
+        ax.set_xticks(x_pos)
+        ax.set_xticklabels(model_names, rotation=45, ha='right', fontsize=9)
+        ax.grid(True, alpha=0.3, axis='y')
+        
+        # Set y-axis minimum for velocity chart
+        if metric_key == 'avg_linear_vel_window':
+            ax.set_ylim(bottom=0.5)
+        
+        # Add horizontal line for mean value
+        mean_val = np.mean(final_values)
+        ax.axhline(y=mean_val, color='red', linestyle='--', linewidth=2, alpha=0.5, label=f'Mean: {mean_val:.2f}')
+        ax.legend(fontsize=9, loc='upper right')
     
     plt.tight_layout()
     save_path = OUTPUT_DIR / "comparison_all_metrics.png"
