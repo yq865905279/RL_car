@@ -1,0 +1,251 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/MattePaint.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Door.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/ThreadMetalPlate.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/WoodenBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/husarion/rosbot/protos/Rosbot.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  fieldOfView 1.2
+  orientation -0.5489054206056424 0.5549868310723198 0.6250539629232399 2.014388493344475
+  position -0.9340417653011693 -4.368311045594452 22.71140146795428
+}
+TexturedBackgroundLight {
+}
+TexturedBackground {
+}
+Solid {
+  children [
+    Shape {
+      appearance ThreadMetalPlate {
+        type "square"
+        textureTransform TextureTransform {
+          scale 100 100
+        }
+      }
+      geometry Plane {
+        size 12 8
+      }
+    }
+  ]
+  name "floor"
+  model "floor"
+  boundingObject Plane {
+    size 12 8
+  }
+  locked TRUE
+}
+DEF rosbot Rosbot {
+  translation -5.000000000264386 3.0000000026336733 -0.0005440888481006989
+  rotation 0.0034623679130298163 0.9999940057402034 -2.2183254949298354e-05 3.0725298660524996e-05
+  controller "<extern>"
+  supervisor TRUE
+  selfCollision TRUE
+}
+WoodenBox {
+  translation 1.45855 1.8261 0.3
+  immersionProperties [
+    ImmersionProperties {
+    }
+  ]
+}
+WoodenBox {
+  translation -0.055248 -0.137921 0.3
+  name "wooden box(1)"
+  immersionProperties [
+    ImmersionProperties {
+    }
+  ]
+}
+WoodenBox {
+  translation 2.24475 0.332079 0.3
+  name "wooden box(5)"
+  immersionProperties [
+    ImmersionProperties {
+    }
+  ]
+}
+WoodenBox {
+  translation 0.52475 -2.73792 0.3
+  name "wooden box(6)"
+  immersionProperties [
+    ImmersionProperties {
+    }
+  ]
+}
+WoodenBox {
+  translation -1.74865 -1.78202 0.3
+  name "wooden box(4)"
+  immersionProperties [
+    ImmersionProperties {
+    }
+  ]
+}
+WoodenBox {
+  translation -0.34535 2.56372 0.3
+  name "wooden box(3)"
+  immersionProperties [
+    ImmersionProperties {
+    }
+  ]
+}
+WoodenBox {
+  translation -2.32712 1.04647 0.3
+  name "wooden box(8)"
+  immersionProperties [
+    ImmersionProperties {
+    }
+  ]
+}
+WoodenBox {
+  translation 1.80385 -1.24171 0.3
+  name "wooden box(2)"
+  immersionProperties [
+    ImmersionProperties {
+    }
+  ]
+}
+Solid {
+  translation -5 3 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../images/起点.jpg"
+          ]
+        }
+        roughness 1
+      }
+      geometry Box {
+        size 1 1 0.001
+      }
+    }
+  ]
+  name "起点"
+}
+Solid {
+  translation 5.88 0.2 0.129999
+  rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 -2.094395307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../images/普通货.jpg"
+          ]
+        }
+        roughness 1
+      }
+      geometry Box {
+        size 1 1 0.001
+      }
+    }
+  ]
+  name "普通货"
+}
+Solid {
+  translation 5.88 1.7 0.099998
+  rotation 0.5773509358560258 -0.577349935856137 -0.577349935856137 2.09439
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../images/易碎品.jpg"
+          ]
+        }
+        roughness 1
+      }
+      geometry Box {
+        size 1 1 0.001
+      }
+    }
+  ]
+  name "易碎品"
+}
+Solid {
+  translation 5.83907 3.13868 0.112587
+  rotation -0.5783252841674272 0.5783252841674272 -0.5753952827277341 2.09293
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../images/危险品.jpg"
+          ]
+        }
+        roughness 1
+      }
+      geometry Box {
+        size 1 1 0.001
+      }
+    }
+  ]
+  name "危险品"
+}
+Wall {
+  translation -0.020481 4.00122 1.21
+  rotation 1.2264404877024328e-06 0.7071062811856401 0.7071072811860378 -3.1415853071795863
+  name "wall(3)"
+  size 12 2.4 0.2
+}
+Wall {
+  translation 2 -4 1.21
+  rotation 1.2264404877024328e-06 0.7071062811856401 0.7071072811860378 -3.1415853071795863
+  name "wall(4)"
+  size 8 2.4 0.2
+}
+Wall {
+  translation -5 -4 1.21
+  rotation 1.2264404877024328e-06 0.7071062811856401 0.7071072811860378 -3.1415853071795863
+  name "wall(5)"
+  size 2 2.4 0.2
+}
+Wall {
+  translation 6 0 0
+  name "wall(1)"
+  size 0.2 8 2.4
+}
+Wall {
+  translation -6 0 0
+  rotation 0 0 1 4.692820414042842e-06
+  name "wall(2)"
+  size 0.2 8 2.4
+}
+Door {
+  translation -3 -3.9 0
+  rotation 0 0 -1 1.5707996938995747
+  size 0.2 2 2.4
+  position -0.01565301432327793
+  frameAppearance MattePaint {
+    baseColor 0 0 0
+  }
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+DEF 卸货区 Solid {
+  translation -5 -2 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../images/卸货区.jpg"
+          ]
+        }
+        roughness 1
+      }
+      geometry Box {
+        size 1 1 0.001
+      }
+    }
+  ]
+}

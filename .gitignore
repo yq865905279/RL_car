@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+mlruns/
+mlruns_test/
+logs/
+results/
+test_logs/
+test_results/
+debug_logs/
+debug_plots/
+
+# IDE specific files
+.vscode/
+.idea/
+.cursor/
+.claude/
