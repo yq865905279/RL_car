@@ -1,0 +1,50 @@
+# PaddleOCR服务端配置文件
+
+# 服务配置
+service:
+  name: "/ocr_service"                    # 服务名称
+  timeout: 30.0                          # 服务超时时间(秒)
+  max_concurrent_requests: 5             # 最大并发请求数
+
+# OCR引擎配置
+ocr_engine:
+  default_language: "ch"                 # 默认识别语言
+  default_use_angle_cls: true           # 默认是否使用角度分类器
+  supported_languages:                  # 支持的语言列表
+    - "ch"      # 中文
+    - "en"      # 英文
+    - "ch_en"   # 中英文混合
+
+# 图像处理配置
+image_processing:
+  max_image_size: 4096                  # 最大图像尺寸(像素)
+  min_image_size: 32                    # 最小图像尺寸(像素)
+  supported_formats:                    # 支持的图像格式
+    - "bgr8"
+    - "rgb8"
+    - "mono8"
+
+# 日志配置
+logging:
+  level: "INFO"                         # 日志级别: DEBUG, INFO, WARN, ERROR
+  enable_request_logging: true          # 是否记录请求日志
+  enable_performance_logging: true      # 是否记录性能日志
+  stats_publish_interval: 10            # 统计信息发布间隔(请求数)
+
+# 性能配置
+performance:
+  enable_caching: false                 # 是否启用缓存(暂未实现)
+  max_processing_time: 60.0             # 最大处理时间(秒)
+  memory_limit_mb: 2048                 # 内存限制(MB)
+
+# 网络配置
+network:
+  enable_remote_access: true            # 是否允许远程访问
+  bind_address: "0.0.0.0"              # 绑定地址
+  port: 11311                          # ROS Master端口
+
+# 监控配置
+monitoring:
+  enable_stats_publisher: true          # 是否启用统计信息发布
+  stats_topic: "/ocr_service_stats"     # 统计信息话题
+  health_check_interval: 30.0           # 健康检查间隔(秒)

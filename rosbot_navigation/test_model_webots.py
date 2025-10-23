@@ -32,12 +32,12 @@ from stable_baselines3.common.monitor import Monitor
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Webots GUI 模型测试")
-    parser.add_argument("--model", type=str, default="/home/dji/RL_car/models/R4.6.10_W2E4_T6.1_normal_20251009_221340/td3_R4.6.10_W2E4_T6.1_normal_20251009_221340_normal_400000_autosave_0.94.zip", help="已训练模型的 .zip 路径 (SB3 格式)")
+    parser.add_argument("--model", type=str, default="../models/R4.6.10_W2E4_T6.1_normal_20251009_221340/td3_R4.6.10_W2E4_T6.1_normal_20251009_221340_normal_400000_autosave_0.94.zip", help="已训练模型的 .zip 路径 (SB3 格式)")
     parser.add_argument("--cargo_type", type=str, default="normal", choices=["normal", "fragile", "dangerous"], help="货物类型")
     parser.add_argument("--episodes", type=int, default=20, help="测试 episode 数")
     parser.add_argument("--deterministic", action="store_true", help="使用确定性策略动作")
     parser.add_argument("--device", type=str, default="cuda", help="模型推理设备：auto/cpu/cuda")
-    parser.add_argument("--world", type=str, default="/home/dji/RL_car/warehouse/worlds/warehouse2_end4.wbt", help="可选，自定义 world 文件路径")
+    parser.add_argument("--world", type=str, default="../warehouse/worlds/warehouse2_end5.wbt", help="可选，自定义 world 文件路径")
     parser.add_argument("--control_period_ms", type=int, default=200, help="控制周期 (ms)，与训练一致")
     parser.add_argument("--fast_mode", action="store_true", help="以 fast 模式运行 Webots (默认关闭以更贴近真实速度)")
     parser.add_argument("--debug", action="store_true", help="启用环境与脚本调试输出")

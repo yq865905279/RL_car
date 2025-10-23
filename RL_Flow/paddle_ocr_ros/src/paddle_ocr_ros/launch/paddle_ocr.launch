@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- PaddleOCR文字识别服务节点 -->
+  <node name="paddle_ocr_service_node" 
+        pkg="paddle_ocr_ros" 
+        type="paddle_ocr_node.py" 
+        output="screen">
+    
+    <!-- 服务名称 -->
+    <param name="service_name" value="/ocr_service" />
+    
+    <!-- 日志级别 -->
+    <param name="log_level" value="INFO" />
+  </node>
+  
+  <!-- 可选：启动服务信息查看器 -->
+  <!-- 
+  <node name="rqt_service_caller" 
+        pkg="rqt_service_caller" 
+        type="rqt_service_caller" />
+  -->
+  
+  <!-- 可选：启动rqt图像查看器用于测试 -->
+  <!-- 
+  <node name="rqt_image_view" 
+        pkg="rqt_image_view" 
+        type="rqt_image_view" 
+        args="/camera/image_raw" />
+  -->
+</launch>

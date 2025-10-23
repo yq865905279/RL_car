@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- PaddleOCR服务端启动文件 -->
+  
+  <!-- 启动参数 -->
+  <arg name="enable_monitor" default="false" />
+  <arg name="enable_rqt" default="false" />
+  
+  <!-- 加载配置文件 -->
+  <rosparam file="$(find paddle_ocr_ros)/config/server_config.yaml" command="load" />
+  
+  <!-- 服务端节点 -->
+  <node name="paddle_ocr_server" 
+        pkg="paddle_ocr_ros" 
+        type="paddle_ocr_node.py" 
+        output="screen"
+        respawn="true"
+        respawn_delay="5">
+    
+    <!-- 服务配置参数 -->
+    <param name="service_name" value="/ocr_service" />
+    <param name="log_level" value="INFO" />
+    <param name="enable_stats" value="true" />
+    
+    <!-- 环境变量 -->
+    <env name="PYTHONPATH" value="$(find paddle_ocr_ros)/src:$(env PYTHONPATH)" />
+  </node>
+  
+  <!-- 可选：启动服务监控节点 -->
+  <node name="service_monitor" 
+        pkg="paddle_ocr_ros" 
+        type="service_monitor.py" 
+        output="screen"
+        if="$(arg enable_monitor)">
+    <param name="monitor_interval" value="10.0" />
+  </node>
+  
+  <!-- 可选：启动rqt服务调用器用于调试 -->
+  <node name="rqt_service_caller" 
+        pkg="rqt_service_caller" 
+        type="rqt_service_caller" 
+        if="$(arg enable_rqt)" />
+  
+</launch>

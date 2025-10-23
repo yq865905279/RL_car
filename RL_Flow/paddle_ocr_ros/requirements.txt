@@ -1,0 +1,12 @@
+# PaddleOCR相关依赖
+paddlepaddle>=2.4.0
+paddleocr>=2.6.0
+
+# OpenCV
+opencv-python>=4.5.0
+
+# 图像处理
+Pillow>=8.0.0
+
+# 其他依赖
+numpy>=1.19.0

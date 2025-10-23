@@ -1,0 +1,14 @@
+# 请求部分
+sensor_msgs/Image input_image    # 输入图像
+string language                  # 识别语言 (可选: "ch", "en", "ch_en")
+bool use_angle_cls              # 是否使用角度分类器 (默认: true)
+
+---
+
+# 响应部分
+bool success                     # 服务调用是否成功
+string message                   # 状态消息
+string[] texts                   # 识别出的文字列表
+float64[] confidences           # 对应的置信度列表
+geometry_msgs/Point[] bboxes    # 边界框坐标 (简化版，实际使用中可能需要更复杂的结构)
+string total_text               # 所有文字的组合

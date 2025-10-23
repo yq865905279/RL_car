@@ -2,6 +2,8 @@
 
 本项目旨在通过深度强化学习，赋予 Rosbot 在复杂动态环境中自主导航的能力。我们基于 Stable-Baselines3 框架，使用 TD3 算法，在 Webots 仿真环境中进行训练与验证。
 
+![训练环境](training_result/plots/world_img.png)
+
 ## 技术选型
 
 *   **仿真平台:** Webots
@@ -49,7 +51,12 @@
     cd RL_car
     pip install -r requirements.txt
     ```
-
+    或者使用docker，运行前请修改docker_run.sh中的路径
+    ```bash
+    cd docker
+    docker build -f webots.dockerfile -t rl_car .
+    bash docker_run.sh
+    ```
 2.  **开始训练:**
     参数配置在args部分，您可以在train_single.py中修改
 
@@ -63,6 +70,9 @@
     ```bash
     python rosbot_navigation/test_model_webots.py
     ```
+
+4. **运行识别服务与监控服务**\
+    [See RL_Flow/README.md](RL_Flow/README.md)
 
 ## 模型表现
 
@@ -96,7 +106,7 @@
 
 ### 训练结果统计
 
-各模型的最终性能指标如下（详见 `training_result/plots/training_statistics.csv`）：
+各模型的最终性能指标如下（详见 [training_result/plots/training_statistics.csv](training_result/plots/training_statistics.csv)）：
 
 | 模型 | 最终奖励 | 最终成功率 |
 |------|---------|---------|
