@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # 容器名称变量
-CONTAINER_NAME="rl-car"
+CONTAINER_NAME="rl_test"
+image_name="rl_car:1.0"
 
 # 检查容器是否已存在
 if [ "$(docker ps -a -q -f name=$CONTAINER_NAME)" ]; then
@@ -20,5 +21,5 @@ else
       -v $HOME/Docker-Project/RL-car/$CONTAINER_NAME/workspace:/root/workspace \
       -v /dev:/dev \
       --ipc=host \
-      -itd rl-car:0.2
+      -itd $image_name
 fi
