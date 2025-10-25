@@ -1,5 +1,3 @@
-# ROSbot导航系统依赖
-
 # 基础科学计算
 numpy>=1.21.0
 scipy>=1.7.0
@@ -11,7 +9,9 @@ gymnasium>=0.29.1
 stable-baselines3[extra]>=2.3.0
 
 # Webots集成
-controller
+# Webots Python 控制器由 Webots 安装提供，不能通过 pip 安装
+# 请确保已安装 Webots 并设置 PYTHONPATH 指向其 controller 包
+opencv-python>=4.7.0
 
 # 实验追踪和可视化
 mlflow>=2.9.0
@@ -21,48 +21,19 @@ tensorboard>=2.10.0
 pandas>=1.3.0
 matplotlib>=3.5.0
 seaborn>=0.11.0
-plotly>=5.0.0
 Pillow>=9.0.0
-scikit-learn>=1.0.0
 
 # 配置文件处理
 pyyaml>=6.0
 
-# 科学工具
-scikit-image>=0.19.0
+# 系统与通信
+requests>=2.28.0
+keyboard>=0.13.5
 
-# 数学工具
-numba>=0.56.0
-
-# 开发工具
-pytest>=7.0.0
-black>=22.0.0
-flake8>=5.0.0
-mypy>=0.991
-
-# 日志管理
-loguru>=0.7.0
-coloredlogs>=15.0
-
-# 进度条
-tqdm>=4.64.0
-
-# Jupyter支持（可选）
-jupyter>=1.0.0
-ipykernel>=6.0.0
-ipython>=8.0.0
-
-# 性能分析（可选）
-psutil>=5.9.0
-py-spy>=0.3.0
-
-# 可视化（可选）
-bokeh>=2.4.0
-
-# 分布式训练（可选）
-# horovod>=0.28.0
-
-# 其他实用工具
-click>=8.0.0
-rich>=12.0.0
-tryceratops>=1.1.0
+# PaddleOCR相关依赖
+paddlepaddle>=2.4.0
+paddleocr>=2.6.0
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6

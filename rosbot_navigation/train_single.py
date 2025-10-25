@@ -667,6 +667,8 @@ def train_single_cargo_model(
         use_predefined_positions=args.use_predefined_positions if args and hasattr(args, 'use_predefined_positions') else False,
         fixed_obstacle_count=args.fixed_obstacle_count if args and hasattr(args, 'fixed_obstacle_count') else 5,
         lock_obstacles_per_stage=args.lock_obstacles_per_stage if args and hasattr(args, 'lock_obstacles_per_stage') else False,
+        obstacle_curriculum_steps=args.obstacle_curriculum_steps if args and hasattr(args, 'obstacle_curriculum_steps') else None,
+        obstacle_curriculum_counts=args.obstacle_curriculum_counts if args and hasattr(args, 'obstacle_curriculum_counts') else None,
         debug=args.debug
     )
     
@@ -943,6 +945,14 @@ def main():
     parser.add_argument('--use_predefined_positions', type=bool, default=False, help='True: 从当前world文件的WoodenBox初始位置集合中选择；False: 在范围内随机生成坐标')
     parser.add_argument('--fixed_obstacle_count', type=int, default=-1, help='障碍物固定数量: >=0时生效并覆盖课程学习；-1时不生效（遵循课程或默认）')
     parser.add_argument('--lock_obstacles_per_stage', type=bool, default=True, help='是否启用阶段锁定模式')
+
+    # 课程学习参数
+    parser.add_argument('--obstacle_curriculum_steps', type=int, nargs='+', 
+                        default=[0,10000,18000,26000,34000,43000,53000,64000,76000,89000,110000,133000,156000], 
+                        help='渐进式障碍物课程学习的步数阈值列表')
+    parser.add_argument('--obstacle_curriculum_counts', type=int, nargs='+', 
+                        default=[2,3,4,5,6,7,8,9,10,11,12,13], 
+                        help='渐进式障碍物课程学习对应的障碍物数量列表')
 
     parser.add_argument('--training_mode', type=str, default='vertical_curriculum', help='训练模式')
     # 绘图参数

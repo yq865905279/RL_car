@@ -44,7 +44,6 @@
 *   **轨迹可视化与数据导出:** 在每个回合结束后，系统会自动生成并保存一张包含机器人路径、奖励分布、起点、终点和障碍物布局的详细轨迹图。这些可视化结果对于调试和直观理解智能体行为至关重要。同时，原始轨迹数据也会被导出为 `.csv` 和 `.jsonl` 文件，便于进行更深入的离线数据分析。
 
 ## 使用指南
-
 1.  **环境配置:**
     ```bash
     git clone <your-repo-url>
@@ -63,7 +62,10 @@
     ```bash
     python rosbot_navigation/train_single.py
     ```
-
+    各个模型的具体训练参数请参考configs文件夹中的配置文件，可以使用bash训练：
+    ```bash
+    bash run_training.sh -c configs/T1.1.yaml
+    ```
 3.  **评估模型:**
     使用 `test_model_webots.py` 脚本来加载并评估您训练好的模型。
 
@@ -72,7 +74,7 @@
     ```
 
 4. **运行识别服务与监控服务**\
-    [See RL_Flow/README.md](RL_Flow/README.md)
+    [详见 RL_Flow/README.md](RL_Flow/README.md)
 
 ## 模型表现
 

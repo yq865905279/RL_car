@@ -1,0 +1,142 @@
+# T1.1 配置文件 - 根据 train_single.py 的 argparse 默认值生成
+
+# 常用训练参数
+tensorboard_log: './logs'
+experiment_name: 'Single-Vertical-R4.7.0'
+model_dir: './results/Single-Vertical-R4.7.0'
+leaner_name: 'R4.7.0_W2E4_T1.1_normal'
+remark: '普通货物类型，使用T1.1版本训练16万步'
+cargo_type: 'normal'
+total_steps: 160000
+pretrained_model_path: ''
+world_1: '../warehouse/worlds/warehouse2_end4.wbt'
+training_mode: 'vertical_curriculum'
+
+# 绘图参数
+plot_vmin: -100.0
+plot_vmax: 100.0
+
+# 基本参数
+device: 'cuda'
+seed: 0
+
+# 环境参数
+obs_mode: 'lidar'
+action_mode: 'wheels'
+macro_action_steps: 1
+enable_speed_smoothing: false
+control_period_ms: 200
+
+# Webots参数
+headless: true
+fast_mode: true
+no_rendering: true
+batch: true
+minimize: true
+
+# UI参数
+show_ui: false
+show_map: false
+display_plot: false
+debug: false
+
+# TD3参数
+learning_rate: 0.0003
+buffer_size: 50000
+learning_starts: 2000
+batch_size: 256
+gamma: 0.99
+tau: 0.005
+train_freq: 1
+gradient_steps: 1
+policy_delay: 2
+exploration_noise_init: 0.1
+target_policy_noise_init: 0.05
+target_noise_clip_init: 0.2
+
+# 日志参数
+verbose: 1
+log_interval: 100
+mlflow_log_interval: 500
+step_avg_window: 1000
+draw_trajectory: true
+
+# 障碍物与课程学习参数
+enable_obstacle_curriculum: true
+use_predefined_positions: true
+fixed_obstacle_count: -1
+lock_obstacles_per_stage: true
+obstacle_curriculum_steps: [0, 5000, 8000, 12000, 17000, 26000, 34000, 46000, 55000, 65000]
+obstacle_curriculum_counts: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+# 继续训练参数
+reset_num_timesteps: false
+
+# 课程学习参数（兼容性）
+curriculum_stage: 'end'
+
+# 奖励系数参数
+delta_distance_k: 30.0
+movement_reward_k: 0.5
+liner_distance_reward: 0
+distance_k: 0.7
+time_k: 0.4
+wall_proximity_penalty_k: 3.0
+angle_reward_k: 5.0
+angle_change_k: 15.0
+directional_movement_k: 50.0
+early_spin_penalty_k: 1.0
+front_clear_k: 1.0
+
+# 停用奖励
+stop_bonus_k: 0.0
+approach_reward_k: 0.0
+slow_down_reward_k: 0.0
+
+show_ui: false # 是否显示实时UI (如轨迹图)
+show_map: false # 是否显示地图
+display_plot: false # 是否在窗口中显示最终轨迹图
+debug: false # 调试模式
+plot_vmin: -100 # 轨迹图奖励颜色范围最小值
+plot_vmax: 100 # 轨迹图奖励颜色范围最大值
+draw_trajectory: true # 是否在回合结束时绘制轨迹图
+
+# --- TD3算法参数 ---
+learning_rate: 0.0003 # 学习率
+buffer_size: 50000 # 回放缓冲区大小
+learning_starts: 2000 # 延迟学习的步数
+batch_size: 256 # 批大小
+gamma: 0.99 # 折扣因子
+tau: 0.005 # 软更新系数
+train_freq: 1 # 训练频率 (步)
+gradient_steps: 1 # 梯度步数
+policy_delay: 2 # 策略延迟更新频率
+exploration_noise_init: 0.1 # 探索噪声标准差
+target_policy_noise_init: 0.05 # 目标策略噪声
+target_noise_clip_init: 0.2 # 目标噪声裁剪范围
+
+# --- 日志与回调参数 ---
+verbose: 1 # 日志详细程度
+log_interval: 100 # 终端日志打印间隔 (回合)
+mlflow_log_interval: 500 # MLflow记录间隔 (步)
+step_avg_window: 1000 # 单步奖励滑动平均窗口大小
+reset_num_timesteps: false # 继续训练时是否重置时间步计数
+
+# --- 课程学习兼容参数 ---
+curriculum_stage: 'end' # 课程阶段 (旧版参数，可能已弃用)
+
+# --- 奖励函数系数 ---
+delta_distance_k: 30.0
+movement_reward_k: 0.5
+liner_distance_reward: 0 # 0:线性, 1:负二次, 2:反比例
+distance_k: 0.7
+time_k: 0.4
+wall_proximity_penalty_k: 3.0
+angle_reward_k: 5.0
+angle_change_k: 15.0
+directional_movement_k: 50.0
+early_spin_penalty_k: 1.0
+front_clear_k: 1.0
+stop_bonus_k: 0.0
+approach_reward_k: 0.0
+slow_down_reward_k: 0.0
