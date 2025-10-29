@@ -91,6 +91,31 @@ RUN export PYTHONPATH=${WEBOTS_HOME}/lib/controller/python:${PYTHONPATH}
 RUN export LD_LIBRARY_PATH=${WEBOTS_HOME}/lib/controller:${LD_LIBRARY_PATH}
 RUN git clone https://github.com/yq865905279/RL_car.git /app_source
 
+# 安装 SSH 服务和 VNC 服务器
+RUN apt-get update --fix-missing && apt-get install -y \
+    xfce4 \
+    xfce4-goodies \
+    tightvncserver
+
+# 设置 SSH 服务
+RUN mkdir /var/run/sshd
+RUN echo 'root:ustb123456' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+# SSH 登录修复提示 'Missing privilege separation directory: /run/sshd'
+RUN mkdir -p /run/sshd
+
+# 设置 VNC 服务器
+RUN mkdir /root/.vnc
+RUN echo "ustb123456" | vncpasswd -f > /root/.vnc/passwd
+RUN chmod 600 /root/.vnc/passwd
+
+# 添加启动脚本
+COPY startup.sh /startup.sh
+RUN chmod +x /startup.sh
+
+# 暴露 SSH 和 VNC 的端口
+EXPOSE 22 5901
+
 # Setup X11 forwarding
 ENV DISPLAY=:0
 ENV QT_X11_NO_MITSHM=1
@@ -122,4 +147,5 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["bash"]
+# 设置容器启动时执行的命令
+CMD ["/startup.sh"]
